@@ -1,0 +1,50 @@
+<head>
+  <title>VoteIt</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      {{> loginButtons}}
+
+      <h1>Create and Vote on Events!</h1>
+
+      {{#if currentUser}}
+        <form class="new-event">
+          <input type="text" name="text" placeholder="Type to create new event" />
+        </form>
+      {{/if}}
+    </header>
+ 
+    <ul>
+      {{#each events}}
+        {{> event}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+
+<template name="event">
+  <li class="event">
+    <button class="btn btn-lg delete">
+      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+    </button>
+    <span class="text"><a href="#" class="votes-link">{{name}}</a></span>
+    <div class="new-suggestion-box">
+      <button class="btn btn-xs btn-info new-suggestion">New Suggestion</button>
+    </div>
+    <span>
+      <form class="suggestion-input" id="suggestion-input-{{_id}}">
+        <input class="suggestion-input-text" type="text" name="text" placeholder="Type to add suggestion" />
+      </form>
+    </span>
+    <div class="votes" id="votes-{{_id}}">
+      {{#each arrayify votes ..}}
+      <li>
+        <button class="btn btn-xs btn-success vote-up">
+          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> vote
+        </button> {{name}} - {{value}}</li>
+      {{/each}}
+    </div>
+  </li>
+</template>
